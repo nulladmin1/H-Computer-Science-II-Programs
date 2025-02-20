@@ -43,9 +43,9 @@
     });
 
     apps = forEachSystem (system: {
-      default = {
+      fraction = {
         type = "app";
-        program = "${self.packages.${system}.default}/bin/programs";
+        program = "${self.packages.${system}.default}/bin/fraction";
       };
     });
   };

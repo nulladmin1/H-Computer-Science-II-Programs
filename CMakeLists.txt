@@ -4,6 +4,6 @@ project(programs)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_subdirectory(src)
+add_subdirectory(fraction)
 
-install(TARGETS programs DESTINATION bin)
+install(TARGETS fraction DESTINATION bin)
