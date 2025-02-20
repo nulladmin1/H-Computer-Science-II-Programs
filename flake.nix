@@ -32,6 +32,7 @@
       default = pkgsFor.${system}.mkShell {
         packages = with pkgsFor.${system}; [
           libllvm
+          libgcc
           cmake
           gtest
         ];
@@ -39,7 +40,7 @@
     });
 
     packages = forEachSystem (system: {
-      default = pkgsFor.${system}.stdenv.mkDerivation {
+      programs = pkgsFor.${system}.stdenv.mkDerivation {
         pname = "programs";
         version = "0.1.0";
         src = ./.;
@@ -56,7 +57,7 @@
     apps = forEachSystem (system: {
       fraction = {
         type = "app";
-        program = "${self.packages.${system}.default}/bin/fraction";
+        program = "${self.packages.${system}.programs}/bin/fraction_exe";
       };
 
       eightQueens = inputs.eightQueens.apps.${system}.default;
