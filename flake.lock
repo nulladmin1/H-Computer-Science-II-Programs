@@ -1,5 +1,28 @@
 {
   "nodes": {
+    "eightQueens": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1738293335,
+        "narHash": "sha256-ScFIhY30XPhLqj6fYlxXUjEQqYUyX3ntHkPTboUxtyg=",
+        "owner": "nulladmin1",
+        "repo": "eightQueens",
+        "rev": "762376b6dae4bc1a9dce19257e8d271e94ac32ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nulladmin1",
+        "repo": "eightQueens",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1739866667,
@@ -16,9 +39,34 @@
         "type": "github"
       }
     },
+    "plague": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1736784938,
+        "narHash": "sha256-dRi6php/6/FQkyGgOR8IG73F7hicTM1u0ryJhyh7Vr8=",
+        "owner": "nulladmin1",
+        "repo": "mp2ExtraCredit",
+        "rev": "b3ef1ddee9cc35e0241899989cf0d494b4893648",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nulladmin1",
+        "repo": "mp2ExtraCredit",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "eightQueens": "eightQueens",
         "nixpkgs": "nixpkgs",
+        "plague": "plague",
         "systems": "systems"
       }
     },

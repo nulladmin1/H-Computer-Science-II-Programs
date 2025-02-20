@@ -4,6 +4,17 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     systems.url = "github:nix-systems/default";
+
+    eightQueens = {
+      url = "github:nulladmin1/eightQueens";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
+    plague = {
+      url = "github:nulladmin1/mp2ExtraCredit";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
   };
 
   outputs = {
@@ -11,7 +22,7 @@
     nixpkgs,
     systems,
     ...
-  }: let
+  } @ inputs: let
     forEachSystem = nixpkgs.lib.genAttrs (import systems);
     pkgsFor = forEachSystem (system: import nixpkgs {inherit system;});
   in {
@@ -47,6 +58,9 @@
         type = "app";
         program = "${self.packages.${system}.default}/bin/fraction";
       };
+
+      eightQueens = inputs.eightQueens.apps.${system}.default;
+      plague = inputs.plague.apps.${system}.default;
     });
   };
 }
