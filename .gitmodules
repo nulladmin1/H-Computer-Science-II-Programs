@@ -1,0 +1,6 @@
+[submodule "plague"]
+	path = plague
+	url = git@github.com:nulladmin1/mp2ExtraCredit.git
+[submodule "eightQueens"]
+	path = eightQueens
+	url = git@github.com:nulladmin1/eightQueens.git
