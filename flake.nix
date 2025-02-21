@@ -35,6 +35,8 @@
           libgcc
           cmake
           gtest
+
+          uncrustify
         ];
       };
     });
