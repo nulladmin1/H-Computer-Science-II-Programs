@@ -16,23 +16,30 @@ using namespace std;
 
 // Constructor with parameters for numerator and denominators,
 //   using setters to set the values for error checking
-Fraction::Fraction(int n, int d) {
+Fraction::Fraction(int n, int d)
+{
     setNumerator(n);
     setDenominator(d);
 }
 
 // Default constructor, setting the numerator and denominator to 1
-Fraction::Fraction() {
+Fraction::Fraction()
+{
     setNumerator(1);
     setDenominator(1);
 }
 
 // Set the numerator to the given value (doesn't need any error checking)
-void Fraction::setNumerator(int numerator) { this->numerator = numerator; }
+void Fraction::setNumerator(int numerator)
+{
+    this->numerator = numerator;
+}
 
 // Set the denominator to the given value, with error checking for 0
-void Fraction::setDenominator(int denominator) {
-    if (denominator == 0) {
+void Fraction::setDenominator(int denominator)
+{
+    if (denominator == 0)
+    {
         throw invalid_argument("Denominator cannot be zero");
     }
     else
@@ -40,19 +47,27 @@ void Fraction::setDenominator(int denominator) {
 }
 
 // Get the numerator
-int Fraction::getNumerator() { return numerator; }
+int Fraction::getNumerator()
+{
+    return numerator;
+}
 
 // Get the denominator
-int Fraction::getDenominator() { return denominator; }
+int Fraction::getDenominator()
+{
+    return denominator;
+}
 
 // Return a new Fraction that is the sum of this Fraction and another Fraction
-Fraction Fraction::add(Fraction other) {
+Fraction Fraction::add(Fraction other)
+{
     // Find the common denominator
     int commonDenominator = this->denominator * other.denominator;
 
     // Add the numerators together using butterfly method
     int addedNumerator =
-        this->numerator * other.denominator + other.numerator * this->denominator;
+        this->numerator * other.denominator + other.numerator *
+        this->denominator;
 
     // Return the new Fraction with the new numerator and common denominator
     return Fraction(addedNumerator, commonDenominator);
@@ -60,32 +75,38 @@ Fraction Fraction::add(Fraction other) {
 
 // Return a new Fraction that is the difference of this Fraction and another
 //  fraction
-Fraction Fraction::subtract(Fraction other) {
+Fraction Fraction::subtract(Fraction other)
+{
     // Find the common denominator
     int commonDenominator = this->denominator * other.denominator;
 
     // Subtract the numerators using butterfly method
     int subtractedNumerator =
-        this->numerator * other.denominator - other.numerator * this->denominator;
+        this->numerator * other.denominator - other.numerator *
+        this->denominator;
 
     // Return the new Fraction with the new numerator and common denominator
     return Fraction(subtractedNumerator, commonDenominator);
 }
 
 // Return a new Fraction that is the product of this Fraction and another
-Fraction Fraction::multiply(Fraction other) {
+Fraction Fraction::multiply(Fraction other)
+{
     // Cross-multiply the numerators and denominators to get the product
-    return Fraction(numerator * other.numerator, denominator * other.denominator);
+    return Fraction(numerator * other.numerator,
+                    denominator * other.denominator);
 }
 
 // Return a new Fraction that is the quotient of this Fraction and another
-Fraction Fraction::divide(Fraction other) {
+Fraction Fraction::divide(Fraction other)
+{
     // Divide by multiplying by the reciprocal
     return multiply(Fraction(other.denominator, other.numerator));
 }
 
 // Recursive function to find the greatest common divisor of two numbers
-int Fraction::gcd(int a, int b) {
+int Fraction::gcd(int a, int b)
+{
     // Base case: if b is 0, return a
     if (b == 0)
         return a;
@@ -97,7 +118,8 @@ int Fraction::gcd(int a, int b) {
 }
 
 // Return a new Fraction that is the simplified version of this Fraction
-Fraction Fraction::simplified() {
+Fraction Fraction::simplified()
+{
     // Make a copy of the numerator and denominator
     int tempNumerator = numerator;
     int tempDenominator = denominator;
@@ -114,7 +136,8 @@ Fraction Fraction::simplified() {
 }
 
 // Set the simiplified version of this Fraction to the current Fraction
-void Fraction::simplify() {
+void Fraction::simplify()
+{
     // Get the simplified version of the Fraction
     Fraction simplifiedFraction = simplified();
 
@@ -123,7 +146,8 @@ void Fraction::simplify() {
     setDenominator(simplifiedFraction.denominator);
 }
 
-Comparison Fraction::compare(Fraction other) {
+Comparison Fraction::compare(Fraction other)
+{
     // Get the simplified versions of both Fractions
     Fraction selfSimplified = this->simplified();
     Fraction otherSimplified = other.simplified();
@@ -141,43 +165,51 @@ Comparison Fraction::compare(Fraction other) {
 }
 
 // Compare this and another Fraction to see if they are equal
-bool Fraction::isEqual(Fraction other) {
+bool Fraction::isEqual(Fraction other)
+{
     // Use the compare function to see if the Fractions are equal
     return compare(other) == EQUAL;
 }
 
 // Compare this and another Fraction to see if this Fraction is greater
-bool Fraction::isGreater(Fraction other) {
+bool Fraction::isGreater(Fraction other)
+{
     // Use the compare function to see if the current Fraction is greater
     return compare(other) == GREATER;
 }
 
 // Compare this and another Fraction to see if this Fraction is less
-bool Fraction::isLess(Fraction other) {
+bool Fraction::isLess(Fraction other)
+{
     // Use the compare function to see if the current Fraction is less
     return compare(other) == LESS;
 }
 
 // Print the Fraction in the form "numerator/denominator"
-void Fraction::printFraction() {
+void Fraction::printFraction()
+{
     // If the denominator is negative, make the numerator negative and the
     //   denominator positive
-    if (denominator < 0) {
+    if (denominator < 0)
+    {
         numerator = -numerator;
         denominator = -denominator;
     }
 
-    if (numerator % denominator == 0) {
+    if (numerator % denominator == 0)
+    {
         // Print whole number if numerator divides evenly with denominator
         cout << numerator / denominator;
     }
-    else if (abs(numerator) > denominator) {
+    else if (abs(numerator) > denominator)
+    {
         // Print the Fraction in mixed form if numerator > denominator
         int tempNumerator = numerator;
 
         int integer = (int)(abs(tempNumerator) / abs(denominator));
 
-        if (tempNumerator < 1) {
+        if (tempNumerator < 1)
+        {
             integer = -integer;
             tempNumerator = -tempNumerator;
         }
@@ -186,8 +218,9 @@ void Fraction::printFraction() {
 
         cout << integer << " " << tempNumerator << '/' << denominator;
     }
-    
-    else {
+
+    else
+    {
         // Print the Fraction in improper form if numerator < denominator
         cout << numerator << '/' << denominator;
     }
@@ -196,10 +229,12 @@ void Fraction::printFraction() {
 }
 
 // Read the Fraction from user input
-void Fraction::readFraction() {
+void Fraction::readFraction()
+{
     // Read the numerator and denominator from the user,
     //  and store them in temporary variables
     int tempNumerator;
+
     cin >> tempNumerator;
 
     cout << "-" << endl;
