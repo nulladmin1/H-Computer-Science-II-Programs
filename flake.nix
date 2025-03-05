@@ -62,6 +62,11 @@
         program = "${self.packages.${system}.programs}/bin/fraction_exe";
       };
 
+      polynomial = {
+        type = "app";
+        program = "${self.packages.${system}.programs}/bin/polynomial_exe";
+      };
+
       eightQueens = inputs.eightQueens.apps.${system}.default;
       plague = inputs.plague.apps.${system}.default;
     });
