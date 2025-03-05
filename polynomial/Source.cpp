@@ -3,20 +3,25 @@
 // Period 4
 // Shrey Deogade & Dylan Staykov
 
-#include "Polynomial.h"
 #include <iostream>
+#include "Polynomial.h"
 using namespace std;
 
-int main() {
-  Polynomial p1;
-  cout << p1 << endl;
+int main() 
+{
+	int a[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	Polynomial p1;
+	cout << p1 << endl;
 
-  Polynomial p2 = p1;
+	Polynomial p2 = p1;
+	Polynomial p3 = p1 * p2;
 
-  Polynomial p3 = p1 * p2;
+	cout << p3 << endl;
 
-  cout << p3 << endl;
-  cout << "²" << endl;
+	Polynomial sum = p1 + p2;
+	cout << "Sum: " << sum << endl;
 
-  return 0;
-}
+	Polynomial difference = p1 - p2;
+	cout << "Difference: " << difference << endl;
+	return 0;
+}	
