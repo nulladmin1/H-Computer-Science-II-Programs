@@ -12,31 +12,33 @@ using namespace std;
 
 class Polynomial {
 private:
-vector<int> coefficients;
-int degree;
-
-void updateDegree();
+	vector<int> coefficients;
 
 public:
-Polynomial();
-Polynomial(vector<int>);
+	Polynomial();
+	Polynomial(vector<int>);
 
-void setCoeffiecent(int, int);
-int getCoeffiecent(int);
-vector<int> getCoefficients();
+	void setCoeffiecent(int, int);
+	int getCoeffiecent(int);
 
-int getDegree();
+	int degree();
 
-bool isZero();
+	bool isZero();
 
-Polynomial operator+(Polynomial &);
-Polynomial operator-(Polynomial &);
-Polynomial operator*(Polynomial &);
-Polynomial operator/(Polynomial &);
-Polynomial &operator=(Polynomial &);
+	Polynomial add(Polynomial);
+	Polynomial subtract(Polynomial);
+	Polynomial multiply(Polynomial);
+	Polynomial divide(Polynomial);
 
-friend ostream &operator<<(ostream &, Polynomial &);
-friend istream &operator>>(istream &, Polynomial &);
+	Polynomial operator+(Polynomial&);
+	Polynomial operator-(Polynomial&);
+	Polynomial operator*(Polynomial&);
+	Polynomial operator/(Polynomial&);
+	Polynomial operator%(Polynomial&);
+	Polynomial& operator=(Polynomial&);
+
+	friend ostream& operator<<(ostream&, Polynomial&);
+	friend istream& operator>>(istream&, Polynomial&);
 };
 
 #endif // POLYNOMIAL_H
