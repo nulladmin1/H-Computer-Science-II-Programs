@@ -27,6 +27,8 @@ vector<int> getCoefficients();
 
 int getDegree();
 
+bool isZero();
+
 Polynomial operator+(Polynomial &);
 Polynomial operator-(Polynomial &);
 Polynomial operator*(Polynomial &);
@@ -34,6 +36,7 @@ Polynomial operator/(Polynomial &);
 Polynomial &operator=(Polynomial &);
 
 friend ostream &operator<<(ostream &, Polynomial &);
+friend istream &operator>>(istream &, Polynomial &);
 };
 
 #endif // POLYNOMIAL_H

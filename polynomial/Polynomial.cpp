@@ -63,6 +63,17 @@ int Polynomial::getDegree()
     return degree;
 }
 
+bool Polynomial::isZero() {
+    for (int i = 0; i < 10; i++)
+    {
+        if (getCoeffiecent(i) != 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 int Polynomial::getCoeffiecent(int index)
 {
     return coefficients.at(index);
@@ -115,23 +126,18 @@ Polynomial Polynomial::operator*(Polynomial &right)
 
 Polynomial Polynomial::operator/(Polynomial &divisor)
 {
-    bool isDivisorZero = true;
-
-    for (int i = 0; i < 10; i++)
-    {
-        if (divisor.getCoeffiecent(i) != 0)
-        {
-            isDivisorZero = false;
-        }
-    }
+    
 
     if (isDivisorZero)
     {
-        throw invalid_argument("Divisor cannot be zero");
+        throw invalid_argument("Divisor cannot be zero when dividing");
     }
 
     vector<int> quotient(10, 0);
-    vector<int> remainder = coefficients;
+    Polynomial remainder = *this;
+
+    while (!remainder.isZero() && remainder.getDegree() > divisor.getDegree()) {
+    }
 
     return Polynomial();
 }
@@ -203,7 +209,9 @@ istream &operator>>(istream &input, Polynomial &p)
 {
     for (int i = 0; i < 10; i++)
     {
-        input >> p.coefficients[i];
+        int value;
+        input >> value;
+        p.setCoeffiecent(i, value);
     }
     return input;
 }
