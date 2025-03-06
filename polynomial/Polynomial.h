@@ -7,26 +7,33 @@
 #define POLYNOMIAL_H
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Polynomial {
 private:
-  int coefficients[10]{};
+vector<int> coefficients;
+int degree;
+
+void updateDegree();
 
 public:
-  Polynomial();
-  Polynomial(int[]);
+Polynomial();
+Polynomial(vector<int>);
 
-  void setCoeffiecent(int, int);
-  int getCoeffiecent(int);
+void setCoeffiecent(int, int);
+int getCoeffiecent(int);
+vector<int> getCoefficients();
 
-  Polynomial operator+(Polynomial &);
-  Polynomial operator-(Polynomial &);
-  Polynomial operator*(Polynomial &);
-  Polynomial operator/(Polynomial &);
-  Polynomial operator=(Polynomial &);
+int getDegree();
 
-  friend ostream &operator<<(ostream &, Polynomial &);
+Polynomial operator+(Polynomial &);
+Polynomial operator-(Polynomial &);
+Polynomial operator*(Polynomial &);
+Polynomial operator/(Polynomial &);
+Polynomial &operator=(Polynomial &);
+
+friend ostream &operator<<(ostream &, Polynomial &);
 };
 
 #endif // POLYNOMIAL_H
