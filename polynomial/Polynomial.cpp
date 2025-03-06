@@ -19,14 +19,14 @@ Polynomial::Polynomial()
 
 Polynomial::Polynomial(vector<int> coefficients)
 {
+    for (int i = 0; i < 10; i++)
+    {
+        this->coefficients.push_back(0);
+    }
+
     for (int i = 0; i < coefficients.size(); i++)
     {
         setCoeffiecent(i, coefficients[i]);
-    }
-
-    for (int i = coefficients.size(); i < 10; i++)
-    {
-        setCoeffiecent(i, 0);
     }
 }
 
@@ -42,25 +42,15 @@ void Polynomial::setCoeffiecent(int index, int value)
     }
 }
 
-void Polynomial::updateDegree()
+int Polynomial::degree()
 {
-    int degree = 0;
-
     for (int i = 9; i >= 0; i--)
     {
         if (coefficients[i] != 0)
         {
-            degree = i;
-            break;
+            return i;
         }
     }
-
-    this->degree = degree;
-}
-
-int Polynomial::getDegree()
-{
-    return degree;
 }
 
 bool Polynomial::isZero() {
@@ -74,28 +64,21 @@ bool Polynomial::isZero() {
     return true;
 }
 
-int Polynomial::getCoeffiecent(int index)
+Polynomial Polynomial::add(Polynomial right)
 {
-    return coefficients.at(index);
-}
-
-Polynomial Polynomial::operator+(Polynomial &right)
-{
-    vector<int> sum(10);
+    vector<int> sum(10, 0);
 
     for (int i = 0; i < 10; i++)
     {
-        sum[i] = coefficients[i] + right.getCoeffiecent(i);
+        sum.at(i) = coefficients.at(i) + right.getCoeffiecent(i);
     }
 
     return Polynomial(sum);
 }
 
-Polynomial Polynomial::operator-(Polynomial &right)
+Polynomial Polynomial::subtract(Polynomial right)
 {
-    vector<int> difference(10);
-
-    ;
+    vector<int> difference(10, 0);
 
     for (int i = 0; i < 10; i++)
     {
@@ -105,9 +88,9 @@ Polynomial Polynomial::operator-(Polynomial &right)
     return Polynomial(difference);
 }
 
-Polynomial Polynomial::operator*(Polynomial &right)
+Polynomial Polynomial::multiply(Polynomial right)
 {
-    vector<int> tempCoefficients(10);
+    vector<int> tempCoefficients(10, 0);
 
     for (int i = 0; i < 10; i++)
     {
@@ -115,8 +98,7 @@ Polynomial Polynomial::operator*(Polynomial &right)
         {
             if (i + j < 10)
             {
-                tempCoefficients[i + j] += coefficients[i] *
-                                           right.getCoeffiecent(j);
+                tempCoefficients.at(i + j) += coefficients.at(i) * right.getCoeffiecent(j);
             }
         }
     }
@@ -124,11 +106,9 @@ Polynomial Polynomial::operator*(Polynomial &right)
     return Polynomial(tempCoefficients);
 }
 
-Polynomial Polynomial::operator/(Polynomial &divisor)
+Polynomial Polynomial::divide(Polynomial divisor)
 {
-    
-
-    if (isDivisorZero)
+    if (!divisor.isZero())
     {
         throw invalid_argument("Divisor cannot be zero when dividing");
     }
@@ -136,13 +116,44 @@ Polynomial Polynomial::operator/(Polynomial &divisor)
     vector<int> quotient(10, 0);
     Polynomial remainder = *this;
 
-    while (!remainder.isZero() && remainder.getDegree() > divisor.getDegree()) {
+    while (!remainder.isZero() && remainder.degree() > divisor.degree()) {
+
     }
 
     return Polynomial();
 }
 
-Polynomial &Polynomial::operator=(Polynomial &right)
+int Polynomial::getCoeffiecent(int index)
+{
+    return coefficients.at(index);
+}
+
+Polynomial Polynomial::operator+(Polynomial& right)
+{
+    return add(right);
+}
+
+Polynomial Polynomial::operator-(Polynomial& right)
+{
+    return subtract(right);
+}
+
+Polynomial Polynomial::operator*(Polynomial& right)
+{
+    return multiply(right);
+}
+
+Polynomial Polynomial::operator/(Polynomial& divisor)
+{
+    return Polynomial();
+}
+
+Polynomial Polynomial::operator%(Polynomial& divisor) {
+
+    return divide(divisor);
+}
+
+Polynomial& Polynomial::operator=(Polynomial& right)
 {
     if (this != &right)
     {
@@ -151,18 +162,9 @@ Polynomial &Polynomial::operator=(Polynomial &right)
     return *this;
 }
 
-ostream &operator<<(ostream &output, Polynomial &p)
+ostream& operator<<(ostream& output, Polynomial& p)
 {
-    int zeroCount = 0;
-
-    for (int i = 9; i >= 0; i--)
-    {
-        if (p.getCoeffiecent(i) == 0)
-        {
-            zeroCount++;
-        }
-    }
-    if (zeroCount == 10)
+    if (p.isZero())
     {
         output << "0";
         return output;
@@ -173,7 +175,7 @@ ostream &operator<<(ostream &output, Polynomial &p)
     {
         if (p.getCoeffiecent(i) != 0)
         {
-            if (p.getCoeffiecent(i) != 1)
+            if (abs(p.getCoeffiecent(i)) != 1)
             {
                 if (p.getCoeffiecent(i) > 0)
                 {
@@ -187,6 +189,18 @@ ostream &operator<<(ostream &output, Polynomial &p)
                 {
                     output << "-";
                     output << p.getCoeffiecent(i) * -1;
+                }
+            }else if(abs(p.getCoeffiecent(i))==1){
+                if (p.getCoeffiecent(i) > 0)
+                {
+                    if (count > 0)
+                    {
+                        output << "+";
+                    }
+                }
+                else
+                {
+                    output << "-";
                 }
             }
             if (i != 0)
@@ -205,11 +219,12 @@ ostream &operator<<(ostream &output, Polynomial &p)
     return output;
 }
 
-istream &operator>>(istream &input, Polynomial &p)
+istream& operator>>(istream& input, Polynomial& p)
 {
     for (int i = 0; i < 10; i++)
     {
         int value;
+        cout << "Enter a coefficient: ";
         input >> value;
         p.setCoeffiecent(i, value);
     }
